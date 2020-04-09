@@ -66,13 +66,19 @@ public class Main
 	    float g = 0.0f;
 	    float b = 0.0f;
 	    if(segment <= ONE_THIRD)
+	    {
 		r = (float)Math.max(MIN_COLOR_VAL, segment * 3.0);
+		g = (float)Math.max(MIN_COLOR_VAL, segment * 3.0);
+	    }
 
 	    if(segment > ONE_THIRD && segment <= TWO_THIRDS)
 		g = (float)Math.max(MIN_COLOR_VAL, (segment - ONE_THIRD) * 3.0);
-
+	    
 	    if(segment >= TWO_THIRDS)
+	    {
+		r = (float)Math.max(MIN_COLOR_VAL, (segment - TWO_THIRDS) * 3.0);
 		b = (float)Math.max(MIN_COLOR_VAL, (segment - TWO_THIRDS) * 3.0);
+	    }
 
 	    Color color = new Color(r, g, b);	    
 	    image.setRGB(x, y, color.getRGB());

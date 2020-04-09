@@ -51,6 +51,8 @@ public class Main
 
 	BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
 	Color[] pixels = new Color[size * size];
+
+	long startTime = System.currentTimeMillis();
 	for(int i = 0; i < size * size; i++)
 	{
 	    int x = i % size;
@@ -75,6 +77,9 @@ public class Main
 	    Color color = new Color(r, g, b);	    
 	    image.setRGB(x, y, color.getRGB());
 	}
+	long endTime = System.currentTimeMillis();
+	float totalTime = (endTime - startTime) / 1000.0f;
+	System.out.printf("Total time: %.2f\n", totalTime);
 
 	try
 	{

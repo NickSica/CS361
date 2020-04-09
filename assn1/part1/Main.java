@@ -8,6 +8,9 @@ public class Main
 {
     public static void main(String[] args)
     {
+	final double ONE_THIRD = 1.0 / 3.0;
+	final double TWO_THIRDS = 2 * ONE_THIRD;
+	final double MIN_COLOR_VAL = 0.1;
 	String imageName = "default.png";
 	int size = 100;
 	int threshold = 0;
@@ -56,11 +59,21 @@ public class Main
 	    double yc = xlo + (xhi - xlo) * x / size;
 
 	    int iters = compute(xc, yc, threshold);
+	    double segment = (double) iters / (double) threshold;
+	    int r = 0;
+	    int g = 0;
+	    int b = 0;
+	    if(segment <= ONE_THIRD)
+		r = (int)Math.max(MIN_COLOR_VAL, segment * 3.0);
 
-	    if(iters < threshold)
-		image.setRGB(x, y, Color.BLACK.getRGB());
-	    else
-		image.setRGB(x, y, Color.WHITE.getRGB());
+	    if(segment > ONE_THIRD && segment <= TWO_THIRDS)
+		g = (int)Math.max(MIN_COLOR_VAL, (segment - ONE_THIRD) * 3.0);
+
+	    if(segment >= TWO_THIRDS)
+		b = (int)Math.max(MIN_COLOR_VAL, (segment - TWO_THIRDS) * 3.0);
+
+	    Color color = new Color(r, g, b);
+	    image.setRGB(x, y, color.getRGB());
 	}
 
 	try

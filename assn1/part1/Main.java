@@ -56,23 +56,23 @@ public class Main
 	    int x = i % size;
 	    int y = i / size;
 	    double xc = xlo + (xhi - xlo) * x / size;
-	    double yc = xlo + (xhi - xlo) * x / size;
+	    double yc = ylo + (yhi - ylo) * y / size;
 
 	    int iters = compute(xc, yc, threshold);
 	    double segment = (double) iters / (double) threshold;
-	    int r = 0;
-	    int g = 0;
-	    int b = 0;
+	    float r = 0.0f;
+	    float g = 0.0f;
+	    float b = 0.0f;
 	    if(segment <= ONE_THIRD)
-		r = (int)Math.max(MIN_COLOR_VAL, segment * 3.0);
+		r = (float)Math.max(MIN_COLOR_VAL, segment * 3.0);
 
 	    if(segment > ONE_THIRD && segment <= TWO_THIRDS)
-		g = (int)Math.max(MIN_COLOR_VAL, (segment - ONE_THIRD) * 3.0);
+		g = (float)Math.max(MIN_COLOR_VAL, (segment - ONE_THIRD) * 3.0);
 
 	    if(segment >= TWO_THIRDS)
-		b = (int)Math.max(MIN_COLOR_VAL, (segment - TWO_THIRDS) * 3.0);
+		b = (float)Math.max(MIN_COLOR_VAL, (segment - TWO_THIRDS) * 3.0);
 
-	    Color color = new Color(r, g, b);
+	    Color color = new Color(r, g, b);	    
 	    image.setRGB(x, y, color.getRGB());
 	}
 

@@ -23,35 +23,40 @@ public class Main
 	{
 	    String argName = args[i];
 	    String argValue = args[i + 1];
-	    switch(argName.toLowerCase())
+	    try
 	    {
-	    case "-image":
-		imageName = argValue;
-		break;
-	    case "-size":
-		size = Integer.parseInt(argValue);
-		break;
-	    case "-threshold":
-		threshold = Integer.parseInt(argValue);
-		break;
-	    case "-xlo":
-		xlo = Double.parseDouble(argValue);
-		break;
-	    case "-xhi":
-		xhi = Double.parseDouble(argValue);
-		break;
-	    case "-ylo":
-		ylo = Double.parseDouble(argValue);
-		break;
-	    case "-yhi":
-		yhi = Double.parseDouble(argValue);
-		break;
+		switch(argName.toLowerCase())
+		{
+		case "-image":
+		    imageName = argValue;
+		    break;
+		case "-size":
+		    size = Integer.parseInt(argValue);
+		    break;
+		case "-threshold":
+		    threshold = Integer.parseInt(argValue);
+		    break;
+		case "-xlo":
+		    xlo = Double.parseDouble(argValue);
+		    break;
+		case "-xhi":
+		    xhi = Double.parseDouble(argValue);
+		    break;
+		case "-ylo":
+		    ylo = Double.parseDouble(argValue);
+		    break;
+		case "-yhi":
+		    yhi = Double.parseDouble(argValue);
+		    break;
+		}
+	    }
+	    catch(NumberFormatException e)
+	    {
+		System.out.println("Error encountered when parsing command line parameters: " + e.toString());
 	    }
 	}
 
 	BufferedImage image = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
-	Color[] pixels = new Color[size * size];
-
 	long startTime = System.currentTimeMillis();
 	for(int i = 0; i < size * size; i++)
 	{
